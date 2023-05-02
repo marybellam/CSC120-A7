@@ -1,32 +1,32 @@
-/**
-* Creates a Cafe Object
-* @param nCoffeeOUnces - the amount of CoffeeOunces
-* @param nSugarPackets - the amount of SugarPackets
-* @param nCreams - the amount of Creams
-* @param nCups - the amount of Cups
-* @return the Cafe Object and information about the Object
-*/
 public class Cafe extends Building{
    private int nCoffeeOunces;
    private int nSugarPackets;
    private int nCreams; 
    private int nCups; 
-
-   /* Overloaded constructer with address */
-  public Cafe(String address) {
+    /**
+     * Overloaded constructor with adress
+     * @param address Adress of the Cafe
+     */
+    public Cafe(String address) {
     super(address);
     this.address = address;
     this.nFloors = 1;
     }
 
-    /* Overloaded constructor with name, address */
-
+    /** Overloaded constructor with name, address 
+    *@param name Name of the Cafe
+    * @param address Address of the Cafe
+    */
    public Cafe(String name, String address) {
        super(name,address);
        this.nFloors = 1;
    }
 
-   /*Full Constructor */
+    /** The Cafe constructor creates a new Cafe Object
+     * @param name Name of the Cafe
+     * @param address Address of the Cafe
+     * @param nFloors Number of floors in the Cafe
+     */
    public Cafe(String name, String address, int nFloors) {
     super(name,address);
     this.nCoffeeOunces = 40;
@@ -35,8 +35,7 @@ public class Cafe extends Building{
     this.nCups = 10;
 }
 
-   /**
-    * Will decrease the amount of ingredients available after an order
+   /**Will decrease the amount of ingredients available after an order
     * @param size
     * @param nSugarPackets
     * @param nCreams
@@ -57,8 +56,7 @@ public class Cafe extends Building{
        System.out.println("sugar creams " + this.nCreams);
        System.out.println("cups " + this.nCups);
    }
-   /**
-    * Will make all of the ingridients to their maximum value
+   /**Will make all of the ingredients to their maximum value
     * @param nCoffeeOunces
     * @param nSugarPackets
     * @param nCreams
@@ -71,11 +69,16 @@ public class Cafe extends Building{
        this.nCups = 10;
        System.out.println("Stocked");
    }
-
+   /**
+    * Prints out the possible methods that can be used
+    */
    public void showOptions(){
     System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n + getCoffee()");
    }
-
+   /** Keeps the person on floor one
+     * @param floorNum the floor number to go to
+     * @throws RuntimeException If customer asks to go to a different floor
+     */
    public void goToFloor(int floorNum) {
     if (floorNum != 1){
         throw new RuntimeException("Invalid floor number. You may only stay in the first floor");

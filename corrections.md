@@ -1,0 +1,1 @@
+I fixed the logic error in the goToFloor() method in the library class. Then I fixed the javadoc header comments.

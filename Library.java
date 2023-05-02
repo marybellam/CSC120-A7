@@ -2,29 +2,28 @@ import java.util.Hashtable;
 import java.util.Set;
 import java.util.Map.Entry;
 
-/**
- * Creates a Library, and stores the name,adress,number of Floors, books, and book availability
- * @param name - name of the Library
- * @param address - address of the Library
- * @param nFloors - number of floors in the Library
- * @param title - the title and author of the book
- * @param isAvailable - if the book is available or not
- * @return a Library object
- */
 public class Library extends Building {
   
   private Hashtable<String, Boolean> collection;
   private boolean hasElevator;
 
-  /* Overloaded constructer with address */
+  /**
+   * Overrides Library constructor
+   * @param address - address of the library
+   */
   public Library(String address) {
     super(address);
     this.address = address;
     this.nFloors = 1;
     this.collection = new Hashtable<String, Boolean>();
     }
-
-    /* Overloaded constructor with name, address, nFloors, and hasElevator */
+  /**
+  * Overrides Library constructor to have name, address, number of floors, and if it has an elevator
+  * @param name - name of library
+  * @param address - address of library
+  * @param nFloors  - number of floors in library
+  * @param hasElevator  -  if the library has an elevator
+  */
   public Library(String name, String address, int nFloors, boolean hasElevator) {
     super(name,address);
     this.name = name;
@@ -34,6 +33,15 @@ public class Library extends Building {
     this.collection = new Hashtable<String, Boolean>();
     }
 
+  /**
+   * The library constructor which creates the library object
+   * @param name - name of library
+   * @param address - address of library
+   * @param nFloors - number of floors in library
+   * @param title - title of book
+   * @param isAvailable - if the book is available
+   * @param hasElevator - if the library has a elevator
+   */
   public Library(String name, String address, int nFloors, String title, Boolean isAvailable, boolean hasElevator) {
     super(name,address,nFloors);
     this.collection = new Hashtable<String, Boolean>();
@@ -94,7 +102,7 @@ public class Library extends Building {
 
   /**
    * Checks if the title is able to be be checked out
-   * @param title
+   * @param title - title of the book
    * @return true if it can be checked out and false if it is not able to be checked out
    */
   public boolean isAvailable(String title){
@@ -126,24 +134,24 @@ public class Library extends Building {
     }   
   }
 
-
+  /**
+   * Prints out the possible methods that can be called
+   */
   public void showOptions(){
     System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n + checkOut()\n + returnBook()");
     }
 
-    public void goToFloor(int floorNum) {
-        if (this.hasElevator == true){
-            super.goToFloor(floorNum);
-        }
-
-        if (this.hasElevator == false && (floorNum == activeFloor + 1 || floorNum == activeFloor -1 || floorNum == activeFloor)){
-            super.goToFloor(floorNum);
-        }else if(this.hasElevator == false) {
-            throw new RuntimeException("Invalid floor number. This house has no elevator");
-        }
-
+  /**
+   * @param floorNum - the number you want to go to
+   * Goes to the floorNum if there is an elevator
+   */
+  public void goToFloor(int floorNum) {
+    if (this.hasElevator == true){
+      super.goToFloor(floorNum);
+    }else{
+      throw new RuntimeException("Invalid floor number. This library has no elevator");
     }
-
+  }
     public static void main(String[] args) {
       Library neilson = new Library("neilson","26 Henshaw Ace Northnahomton", 3,"little red",true,false);
       System.out.println(neilson);
@@ -154,6 +162,6 @@ public class Library extends Building {
       Library hilliyer = new Library("hilliyer","26 Henshaw Ace Northnahomton", 3 , true);
       System.out.println(hilliyer);
 
-      hilliyer.showOptions();
+      hilliyer.enter();
     }
   }

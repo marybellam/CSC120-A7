@@ -1,37 +1,42 @@
 import java.util.ArrayList;
 
-/**
- * Creates a House, and stores the name,adress,number of Floors, residents, and dining room variables
- * @param name - name of the House
- * @param address - address of the House
- * @param nFloors - number of floors in the House
- * @param hasDiningRoom - if the House has a dining room
- * @return a House object
- */
-
 public class House extends Building {
 
   private ArrayList<String> residents;
   private boolean hasDiningRoom;
   private boolean hasElevator;
 
-    /* Overloaded constructer with adress */
+  /**
+   * Overrides house constructor with house
+   * @param address - the address of the house
+   */
   public House(String address) {
     super(address);
     this.address = address;
     this.nFloors = 1;
     this.residents = new ArrayList<String>();
-}
+  }
 
-    /* Overloaded constructor with name, address */
+  /**
+   * Overrides House constructor with name and adress
+   * @param name - name of the house
+   * @param address - adress of the house
+   */
   public House(String name, String address) {
     super(name,address);
     this.name = name;
     this.address = address;
     this.nFloors = 1;
     this.residents = new ArrayList<String>();
-}
-    /* Full Constructor */
+  }
+  /**
+   * Full House Constructor that creates house object
+   * @param name - name of the house
+   * @param address - adress of the house
+   * @param nFloors  - number of floors in the house
+   * @param hasDiningRoom - if the house has a dining room
+   * @param hasElevator - if thehouse has an elevator
+   */
   public House(String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator) {
     super(name,address,nFloors);
     this.residents = new ArrayList<String>();
@@ -111,29 +116,38 @@ public class House extends Building {
       return false;
       }
     }
+  /**
+   * Prints out any available method options
+   */
+  public void showOptions(){
+    System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n + goToDiningRoom()\n + moveIn()\n + moveOut()");
+  }
 
-    public void showOptions(){
-        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n + goToDiningRoom()\n + moveIn()\n + moveOut()");
+  /**
+   * Goes into the dining room
+   */
+  public void goToDiningRoom(){
+    if(hasDiningRoom == false){
+        throw new RuntimeException("This house has no dining room.");
+    }else{
+        System.out.println("You are now in the dining hall.");
     }
+  }
 
-    public void goToDiningRoom(){
-        if(hasDiningRoom == false){
-            throw new RuntimeException("This house has no dining room.");
-        }else{
-            System.out.println("You are now in the dining hall.");
-        }
+  /**
+   * If the House has an elevator it will go to that floor
+   * @param floorNum - the desired floor 
+   */
+  public void goToFloor(int floorNum) {
+    if (this.hasElevator == true){
+      super.goToFloor(floorNum);
     }
-
-    public void goToFloor(int floorNum) {
-        if (this.hasElevator == true){
-            super.goToFloor(floorNum);
-        }
-        if (this.hasElevator == false && (floorNum == activeFloor + 1 || floorNum == activeFloor -1 || floorNum == activeFloor)){
-            super.goToFloor(floorNum);
-        }else if(this.hasElevator == false) {
-            throw new RuntimeException("Invalid floor number. This house has no elevator");
-        }
+    if (this.hasElevator == false && (floorNum == activeFloor + 1 || floorNum == activeFloor -1 || floorNum == activeFloor)){
+      super.goToFloor(floorNum);
+    }else if(this.hasElevator == false) {
+      throw new RuntimeException("Invalid floor number. This house has no elevator");
     }
+  }
 
   public static void main(String[] args) {
     House ziskind = new House("Zisking","1 Henshaw Ace northhampton", 3,true,false);
